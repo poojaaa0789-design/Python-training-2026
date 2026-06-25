@@ -1,0 +1,42 @@
+
+students = {}      # Dictionary
+grades = set()     # Set
+
+n = int(input("Number of students: "))
+
+for i in range(n):
+    name = input("Enter name: ")
+    marks = int(input("Enter marks: "))
+
+    students[name] = marks
+
+print("\nResults:")
+
+result = [(name, marks) for name, marks in students.items()]  
+
+for name, marks in result:
+
+    if marks >= 90:
+        grade = "A"
+    elif marks >= 75:
+        grade = "B"
+    elif marks >= 50:
+        grade = "C"
+    else:
+        grade = "Fail"
+
+    grades.add(grade)
+
+    print(name, "Marks:", marks, "Grade:", grade)
+
+
+average = sum([marks for marks in students.values()]) / n
+
+print("\nAverage Marks:", average)
+
+
+topper = max(students, key=students.get)
+
+print("Topper:", topper, students[topper])
+
+print("Grades:", grades)
