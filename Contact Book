@@ -1,0 +1,28 @@
+
+contacts = {}     
+numbers = set()   
+
+
+# Add contact
+name = input("Enter name: ")
+number = input("Enter number: ")
+
+if number in numbers:
+    print("Duplicate number")
+else:
+    contacts[name] = number
+    numbers.add(number)
+    print("Contact saved")
+
+search = input("Search name: ")
+
+if search in contacts:
+    print("Number:", contacts[search])
+else:
+    print("Contact not found")
+
+
+
+contact_list = [(name, num) for name, num in contacts.items()]  
+
+print("All Contacts:", contact_list)
