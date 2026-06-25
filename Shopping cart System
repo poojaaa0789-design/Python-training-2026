@@ -1,0 +1,28 @@
+
+price = {
+    "Apple": 50,
+    "Milk": 40,
+    "Bread": 30
+}
+
+cart = []           
+category = set()   
+
+
+item = input("Enter item: ")
+qty = int(input("Enter quantity: "))
+
+cart.append((item, qty))   # Tuple
+category.add("Grocery")
+
+
+print("\nCart Items:")
+
+for i, q in cart:
+    print(i, q)
+
+
+bill = sum([price[i] * q for i, q in cart])
+
+print("Total Bill:", bill)
+print("Categories:", category)
