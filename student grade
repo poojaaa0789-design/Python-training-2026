@@ -1,0 +1,47 @@
+class Student:
+
+    def calculate_grade(self, marks):
+
+        if marks >= 80:
+            return "A"
+        elif marks >= 60:
+            return "B"
+        elif marks >= 40:
+            return "C"
+        else:
+            return "F"
+
+
+    def process_data(self):
+
+        try:
+            infile = open("students.txt", "r")
+            outfile = open("result.txt", "w")
+
+            for line in infile:
+
+                data = line.split()
+
+                name = data[0]
+                marks = int(data[1])
+
+                grade = self.calculate_grade(marks)
+
+                outfile.write(name + " ")
+                outfile.write(str(marks) + " ")
+                outfile.write(grade + "\n")
+
+            infile.close()
+            outfile.close()
+
+            print("Result file created successfully.")
+
+        except FileNotFoundError:
+            print("students.txt file not found.")
+
+        except:
+            print("Something went wrong.")
+
+
+obj = Student()
+obj.process_data()
