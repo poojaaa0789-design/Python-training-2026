@@ -1,0 +1,57 @@
+
+def log(func):
+    def wrapper():
+        print("Calculating Salary...")
+        return func()
+    return wrapper
+
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+
+    def calculate_salary(self):
+        pass
+
+
+class FullTimeEmployee(Employee):
+    def __init__(self, name, salary):
+        super().__init__(name)
+        self.salary = salary
+
+    def calculate_salary(self):
+        return self.salary
+
+
+class PartTimeEmployee(Employee):
+    def __init__(self, name, hours, rate):
+        super().__init__(name)
+        self.hours = hours
+        self.rate = rate
+
+    def calculate_salary(self):
+        return self.hours * self.rate
+
+
+choice = input("1.Full Time\n2.Part Time\nEnter Choice: ")
+
+if choice == "1":
+    name = input("Enter Name: ")
+    salary = float(input("Enter Salary: "))
+    emp = FullTimeEmployee(name, salary)
+else:
+    name = input("Enter Name: ")
+    hours = int(input("Enter Hours: "))
+    rate = float(input("Enter Rate: "))
+    emp = PartTimeEmployee(name, hours, rate)
+
+
+salary = log(emp.calculate_salary)()
+
+print("Salary =", salary)
+
+file = open("payroll.txt", "a")
+file.write(emp.name + " - " + str(salary) + "\n")
+file.close()
+
+print("Saved Successfully")
