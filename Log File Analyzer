@@ -1,0 +1,47 @@
+import re
+
+def display(func):
+    def wrapper():
+        print("Checking Log File...")
+        func()
+    return wrapper
+
+
+class Log:
+    def check(self, line):
+        pass
+
+
+class ErrorLog(Log):
+
+    def check(self, line):
+        if re.search("ERROR", line):     
+            return line.strip()
+
+def read(file):
+    for line in file:
+        yield line
+
+
+def analyze():
+    log = ErrorLog()
+
+    f = open("log.txt", "r")
+    r = open("report.txt", "w")
+
+    for line in read(f):
+        result = log.check(line)
+
+        if result:
+            print(result)
+            r.write(result + "\n")
+
+    f.close()
+    r.close()
+
+    print("Report Saved")
+
+
+analyze = display(analyze)
+
+analyze()
