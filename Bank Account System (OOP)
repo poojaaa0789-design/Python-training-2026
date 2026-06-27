@@ -1,0 +1,48 @@
+import re
+
+
+class Account:
+    def __init__(self, number, balance):
+        self.number = number
+        self.__balance = balance      
+
+    def show_balance(self):
+        print("Balance =", self.__balance)
+
+    def withdraw(self, amount):
+        if amount <= self.__balance:
+            self.__balance -= amount
+            print("Money Withdrawn")
+        else:
+            print("Not Enough Balance")
+
+
+class SavingsAccount(Account):
+
+    def withdraw(self, amount):      
+        print("Savings Account")
+        super().withdraw(amount)
+
+
+class CurrentAccount(Account):
+
+    def withdraw(self, amount):      
+        print("Current Account")
+        super().withdraw(amount)
+
+
+acc_no = input("Enter Account Number: ")
+
+if re.match("^[0-9]{6}$", acc_no): 
+
+    balance = float(input("Enter Balance: "))
+
+    acc = SavingsAccount(acc_no, balance)
+
+    amount = float(input("Enter Amount: "))
+    acc.withdraw(amount)
+
+    acc.show_balance()
+
+else:
+    print("Invalid Account Number")
